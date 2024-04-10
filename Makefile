@@ -1,5 +1,5 @@
 VERSION=$(shell git describe --tags --abbrev=0)
-DEFAULT_IMAGE=bot:${VERSION}
+DEFAULT_IMAGE=bot
 
 linux:
 	make build GOOS=linux GOARCH=amd64
@@ -25,7 +25,7 @@ lint:
 build: format dependencies
 	CGO_ENABLED=0 go build -v -o bot -ldflags "-X="github.com/mlnvskk/bot/cmd.appVersion=${VERSION}
 
-docker-build:
+image:
 	docker build --tag ${DEFAULT_IMAGE} .
 
 clean:
